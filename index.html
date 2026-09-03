@@ -10,355 +10,68 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --midnight: #0D0D10;
-      --charcoal: #19191F;
-      --ivory: #F5F1EA;
-      --red: #D84A5B;
-      --rose: #E88994;
-      --grey: #96949C;
-      --border: rgba(245, 241, 234, 0.10);
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ivory);
-      background:
-        radial-gradient(circle at 50% 28%, rgba(216, 74, 91, 0.08), transparent 34rem),
-        var(--midnight);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    .shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
-
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 20;
-      background: linear-gradient(to bottom, rgba(13,13,16,.92), rgba(13,13,16,.58), transparent);
-      backdrop-filter: blur(8px);
-    }
-
-    .nav {
-      height: 82px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .brand {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: .24em;
-      text-transform: uppercase;
-    }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      color: var(--grey);
-      font-size: 12px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .status::before {
-      content: "";
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--red);
-      box-shadow: 0 0 18px rgba(216,74,91,.65);
-    }
-
-    main { overflow: hidden; }
-
-    .hero {
-      min-height: 100svh;
-      display: grid;
-      place-items: center;
-      padding: 120px 0 72px;
-      text-align: center;
-    }
-
-    .hero-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 780px;
-    }
-
-    .logo-wrap {
-      width: clamp(220px, 31vw, 350px);
-      aspect-ratio: 1;
-      margin-bottom: 2px;
-      display: grid;
-      place-items: center;
-    }
-
-    .logo {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: contain;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(42px, 6vw, 76px);
-      line-height: .98;
-      letter-spacing: -.055em;
-      font-weight: 500;
-    }
-
-    .accent { color: var(--red); }
-
-    .lede {
-      margin: 28px auto 0;
-      max-width: 600px;
-      color: rgba(245,241,234,.68);
-      font-size: clamp(17px, 2vw, 21px);
-      line-height: 1.65;
-    }
-
-    .cta-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 38px;
-    }
-
-    .store-btn {
-      min-width: 168px;
-      min-height: 54px;
-      padding: 0 21px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.045);
-      color: var(--ivory);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 11px;
-      font-size: 14px;
-      font-weight: 500;
-      transition: transform .2s ease, background .2s ease, border-color .2s ease;
-    }
-
-    .store-btn:hover {
-      transform: translateY(-2px);
-      background: rgba(255,255,255,.07);
-      border-color: rgba(245,241,234,.18);
-    }
-
-    .store-btn span {
-      color: var(--grey);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-    }
-
-    .scroll-note {
-      margin-top: 56px;
-      color: rgba(150,148,156,.55);
-      font-size: 11px;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-
-    .section {
-      padding: 120px 0;
-      border-top: 1px solid rgba(245,241,234,.07);
-    }
-
-    .section-head {
-      max-width: 660px;
-      margin-bottom: 54px;
-    }
-
-    .eyebrow {
-      margin-bottom: 16px;
-      color: var(--red);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: clamp(32px, 4vw, 52px);
-      line-height: 1.08;
-      letter-spacing: -.04em;
-      font-weight: 500;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .card {
-      min-height: 210px;
-      padding: 28px;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.018));
-    }
-
-    .number {
-      margin-bottom: 54px;
-      color: var(--rose);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .14em;
-    }
-
-    .card h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      font-weight: 500;
-      letter-spacing: -.02em;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--grey);
-      font-size: 14px;
-      line-height: 1.65;
-    }
-
-    .final {
-      text-align: center;
-      padding-bottom: 140px;
-    }
-
-    .final p {
-      max-width: 560px;
-      margin: 20px auto 0;
-      color: var(--grey);
-      line-height: 1.7;
-    }
-
-    footer {
-      padding: 28px 0 38px;
-      border-top: 1px solid rgba(245,241,234,.07);
-      color: rgba(150,148,156,.72);
-      font-size: 12px;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links { display: flex; gap: 22px; }
-    .footer-links a { transition: color .2s ease; }
-    .footer-links a:hover { color: var(--ivory); }
-
-    @media (max-width: 760px) {
-      .shell { width: min(100% - 28px, 1120px); }
-      .nav { height: 70px; }
-      .hero { padding-top: 96px; }
-      .logo-wrap { width: 220px; }
-      .lede { font-size: 16px; }
-      .cards { grid-template-columns: 1fr; }
-      .card { min-height: 170px; }
-      .number { margin-bottom: 36px; }
-      .section { padding: 88px 0; }
-      .footer-inner { flex-direction: column; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      * { transition: none !important; }
-    }
+    :root { --midnight:#0D0D10; --ivory:#F5F1EA; --red:#D84A5B; --rose:#E88994; --grey:#96949C; --border:rgba(245,241,234,.10); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; min-height:100vh; font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--ivory); background:radial-gradient(circle at 50% 28%,rgba(216,74,91,.08),transparent 34rem),var(--midnight); -webkit-font-smoothing:antialiased; }
+    a { color:inherit; text-decoration:none; }
+    .shell { width:min(1120px,calc(100% - 40px)); margin:0 auto; }
+    header { position:fixed; top:0; left:0; right:0; z-index:20; background:linear-gradient(to bottom,rgba(13,13,16,.92),rgba(13,13,16,.58),transparent); backdrop-filter:blur(8px); }
+    .nav { height:82px; display:flex; align-items:center; justify-content:space-between; }
+    .brand { font-size:13px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; }
+    .status { display:inline-flex; align-items:center; gap:9px; color:var(--grey); font-size:12px; letter-spacing:.08em; text-transform:uppercase; }
+    .status::before { content:""; width:7px; height:7px; border-radius:999px; background:var(--red); box-shadow:0 0 18px rgba(216,74,91,.65); }
+    main { overflow:hidden; }
+    .hero { min-height:100svh; display:grid; place-items:center; padding:120px 0 72px; text-align:center; }
+    .hero-inner { display:flex; flex-direction:column; align-items:center; max-width:780px; }
+    .logo-wrap { width:clamp(220px,31vw,350px); aspect-ratio:1; margin-bottom:2px; display:grid; place-items:center; }
+    .logo { width:100%; height:100%; display:block; object-fit:contain; }
+    h1 { margin:0; font-size:clamp(42px,6vw,76px); line-height:1.02; letter-spacing:-.055em; font-weight:500; }
+    .accent { color:var(--red); }
+    .lede { margin:28px auto 0; max-width:600px; color:rgba(245,241,234,.68); font-size:clamp(17px,2vw,21px); line-height:1.65; }
+    .cta-row { display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin-top:38px; }
+    .store-btn { min-width:168px; min-height:54px; padding:0 21px; border-radius:14px; border:1px solid var(--border); background:rgba(255,255,255,.045); color:var(--ivory); display:inline-flex; align-items:center; justify-content:center; gap:11px; font-size:14px; font-weight:500; transition:transform .2s ease,background .2s ease,border-color .2s ease; }
+    .store-btn:hover { transform:translateY(-2px); background:rgba(255,255,255,.07); border-color:rgba(245,241,234,.18); }
+    .store-btn span { color:var(--grey); font-size:10px; text-transform:uppercase; letter-spacing:.12em; }
+    .scroll-note { margin-top:56px; color:rgba(150,148,156,.55); font-size:11px; letter-spacing:.16em; text-transform:uppercase; }
+    .section { padding:120px 0; border-top:1px solid rgba(245,241,234,.07); }
+    .section-head { max-width:660px; margin-bottom:54px; }
+    .eyebrow { margin-bottom:16px; color:var(--red); font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; }
+    h2 { margin:0; font-size:clamp(32px,4vw,52px); line-height:1.08; letter-spacing:-.04em; font-weight:500; }
+    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .card { min-height:210px; padding:28px; border:1px solid var(--border); border-radius:22px; background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.018)); }
+    .number { margin-bottom:54px; color:var(--rose); font-size:12px; font-weight:600; letter-spacing:.14em; }
+    .card h3 { margin:0 0 10px; font-size:18px; font-weight:500; letter-spacing:-.02em; }
+    .card p { margin:0; color:var(--grey); font-size:14px; line-height:1.65; }
+    .final { text-align:center; padding-bottom:140px; }
+    .final p { max-width:560px; margin:20px auto 0; color:var(--grey); line-height:1.7; }
+    footer { padding:28px 0 38px; border-top:1px solid rgba(245,241,234,.07); color:rgba(150,148,156,.72); font-size:12px; }
+    .footer-inner { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+    .footer-links { display:flex; gap:22px; }
+    .footer-links a { transition:color .2s ease; }
+    .footer-links a:hover { color:var(--ivory); }
+    @media (max-width:760px) { .shell{width:min(100% - 28px,1120px)} .nav{height:70px} .hero{padding-top:96px} .logo-wrap{width:220px} .lede{font-size:16px} .cards{grid-template-columns:1fr} .card{min-height:170px} .number{margin-bottom:36px} .section{padding:88px 0} .footer-inner{flex-direction:column} }
+    @media (prefers-reduced-motion:reduce) { html{scroll-behavior:auto} *{transition:none!important} }
   </style>
 </head>
 <body>
-  <header>
-    <div class="shell nav">
-      <div class="brand">My Conquests</div>
-      <div class="status">Coming soon</div>
-    </div>
-  </header>
-
+  <header><div class="shell nav"><div class="brand">My Conquests</div><div class="status">Coming soon</div></div></header>
   <main>
-    <section class="hero">
-      <div class="shell hero-inner">
-        <div class="logo-wrap">
-          <img class="logo" src="assets/MyConquests_Logo_Dark_2048.png" alt="My Conquests monogram" />
-        </div>
-        <h1>Your stories.<br><span class="accent">Your rules.</span></h1>
-        <p class="lede">A private space to keep your conquests, explore your own stats and share only what you choose — with the people you choose.</p>
-        <div class="cta-row" aria-label="App availability">
-          <div class="store-btn">App Store <span>Soon</span></div>
-          <div class="store-btn">Google Play <span>Soon</span></div>
-        </div>
-        <div class="scroll-note">Built for privacy</div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="shell">
-        <div class="section-head">
-          <div class="eyebrow">My Conquests</div>
-          <h2>Personal by nature.<br>Private by design.</h2>
-        </div>
-        <div class="cards">
-          <article class="card">
-            <div class="number">01</div>
-            <h3>Keep your history</h3>
-            <p>Your personal space to remember the people, places and moments that matter to you.</p>
-          </article>
-          <article class="card">
-            <div class="number">02</div>
-            <h3>See your world</h3>
-            <p>Turn your own history into a visual timeline, meaningful stats and a map that is uniquely yours.</p>
-          </article>
-          <article class="card">
-            <div class="number">03</div>
-            <h3>Share selectively</h3>
-            <p>You decide exactly what leaves your private space, who sees it and for how long.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section final">
-      <div class="shell">
-        <div class="eyebrow">Coming soon</div>
-        <h2>My Conquests is on the way.</h2>
-        <p>Launching first on mobile. App Store and Google Play links will appear here as soon as the first public version is ready.</p>
-      </div>
-    </section>
+    <section class="hero"><div class="shell hero-inner">
+      <div class="logo-wrap"><img class="logo" src="assets/MyConquests_Logo_Dark_2048.png" alt="My Conquests monogram" /></div>
+      <h1>Every story is<br><span class="accent">yours to tell.</span></h1>
+      <p class="lede">A private space to keep your conquests, explore your own stats and share only what you choose — with the people you choose.</p>
+      <div class="cta-row" aria-label="App availability"><div class="store-btn">App Store <span>Soon</span></div><div class="store-btn">Google Play <span>Soon</span></div></div>
+      <div class="scroll-note">Built for privacy</div>
+    </div></section>
+    <section class="section"><div class="shell"><div class="section-head"><div class="eyebrow">My Conquests</div><h2>Personal by nature.<br>Private by design.</h2></div><div class="cards">
+      <article class="card"><div class="number">01</div><h3>Keep your history</h3><p>Your personal space to remember the people, places and moments that matter to you.</p></article>
+      <article class="card"><div class="number">02</div><h3>See your world</h3><p>Turn your own history into a visual timeline, meaningful stats and a map that is uniquely yours.</p></article>
+      <article class="card"><div class="number">03</div><h3>Share selectively</h3><p>You decide exactly what leaves your private space, who sees it and for how long.</p></article>
+    </div></div></section>
+    <section class="section final"><div class="shell"><div class="eyebrow">Coming soon</div><h2>My Conquests is on the way.</h2><p>Launching first on mobile. App Store and Google Play links will appear here as soon as the first public version is ready.</p></div></section>
   </main>
-
-  <footer>
-    <div class="shell footer-inner">
-      <div>© <span id="year"></span> My Conquests</div>
-      <div class="footer-links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="mailto:support@myconquests.com">Support</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <footer><div class="shell footer-inner"><div>© <span id="year"></span> My Conquests</div><div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="mailto:support@myconquests.com">Support</a></div></div></footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
 </body>
 </html>

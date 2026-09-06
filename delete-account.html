@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Delete account · My Conquests</title>
+  <meta name="description" content="Request deletion of your My Conquests account and associated data." />
+  <meta name="theme-color" content="#0D0D10" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--midnight:#0D0D10;--surface:#151519;--ivory:#F5F1EA;--red:#D84A5B;--grey:#96949C;--border:rgba(245,241,234,.10);--field:rgba(255,255,255,.045)}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ivory);background:var(--midnight);-webkit-font-smoothing:antialiased}
+    body{min-height:100svh}
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}
+    .page{min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;background:var(--midnight)}
+    .shell{width:min(1120px,calc(100% - 40px));margin:0 auto}
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase}
+    .back{color:var(--grey);font-size:12px;transition:color .2s ease}
+    .back:hover{color:var(--ivory)}
+    main{display:grid;place-items:center;padding:34px 0 50px}
+    .card{width:min(500px,100%);padding:30px;border:1px solid var(--border);border-radius:22px;background:var(--surface);box-shadow:0 24px 80px rgba(0,0,0,.26)}
+    .eyebrow{margin-bottom:12px;color:var(--red);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+    h1{margin:0;font-size:28px;line-height:1.15;letter-spacing:-.035em;font-weight:500}
+    .intro{margin:14px 0 0;color:var(--grey);font-size:14px;line-height:1.65}
+    .step{margin-top:26px}
+    label{display:block;margin:0 0 8px;color:rgba(245,241,234,.78);font-size:12px;font-weight:500}
+    input{width:100%;height:48px;padding:0 14px;border:1px solid var(--border);border-radius:12px;outline:none;background:var(--field);color:var(--ivory);font-size:14px;transition:border-color .2s ease,background .2s ease}
+    input:focus{border-color:rgba(245,241,234,.34);background:rgba(255,255,255,.06)}
+    input::placeholder{color:rgba(150,148,156,.66)}
+    .otp{letter-spacing:.35em;text-align:center;font-size:19px;font-weight:600}
+    .action{width:100%;height:48px;margin-top:12px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.055);color:var(--ivory);font-weight:500;cursor:pointer;transition:background .2s ease,border-color .2s ease,opacity .2s ease}
+    .action:hover{background:rgba(255,255,255,.085);border-color:rgba(245,241,234,.16)}
+    .action:disabled{opacity:.45;cursor:not-allowed}
+    .danger{background:var(--red);border-color:var(--red);color:#fff}
+    .danger:hover{background:#e25565;border-color:#e25565}
+    .message{min-height:20px;margin-top:12px;color:var(--grey);font-size:12px;line-height:1.55;text-align:center}
+    .message.error{color:#ef8893}
+    .note{margin-top:22px;padding-top:20px;border-top:1px solid rgba(245,241,234,.07);color:rgba(150,148,156,.72);font-size:11px;line-height:1.65}
+    .hidden{display:none}
+    .success{text-align:center;padding:10px 0 4px}
+    .success-mark{width:44px;height:44px;margin:0 auto 15px;border:1px solid rgba(216,74,91,.35);border-radius:50%;display:grid;place-items:center;color:var(--red);font-size:20px}
+    footer{position:relative}
+    .footer-inner{min-height:58px;border-top:1px solid rgba(245,241,234,.07);display:flex;align-items:center;justify-content:space-between;color:rgba(150,148,156,.72);font-size:11px}
+    .footer-links{display:flex;gap:22px}
+    .footer-links a:hover{color:var(--ivory)}
+    @media(max-width:620px){.shell{width:min(100% - 28px,1120px)}.nav{height:62px}.brand{font-size:10px}.card{padding:24px 20px;border-radius:19px}main{padding:24px 0 34px}h1{font-size:25px}.footer-inner>div:first-child{display:none}.footer-links{width:100%;justify-content:center;gap:20px}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="shell nav">
+        <a class="brand" href="/">My Conquests</a>
+        <a class="back" href="/">Back to home</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="shell">
+        <div class="card" id="deleteCard">
+          <div id="requestStep">
+            <div class="eyebrow">Account & privacy</div>
+            <h1>Delete your account</h1>
+            <p class="intro">Enter the email linked to your My Conquests account. We’ll send you a one-time verification code before anything can be deleted.</p>
+            <div class="step">
+              <label for="email">Account email</label>
+              <input id="email" type="email" autocomplete="email" placeholder="you@example.com" />
+              <button class="action" id="sendCode" type="button">Send verification code</button>
+              <div class="message" id="requestMessage" aria-live="polite"></div>
+            </div>
+            <div class="note">For your security, opening this page or entering an email address never deletes anything. Account deletion only becomes available after successful email verification.</div>
+          </div>
+
+          <div id="verifyStep" class="hidden">
+            <div class="eyebrow">Verify your identity</div>
+            <h1>Check your email</h1>
+            <p class="intro" id="verifyIntro">Enter the 6-digit verification code we sent to your email address.</p>
+            <div class="step">
+              <label for="otp">Verification code</label>
+              <input id="otp" class="otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000" />
+              <button class="action" id="verifyCode" type="button">Verify code</button>
+              <button class="action" id="resendCode" type="button">Send a new code</button>
+              <div class="message" id="verifyMessage" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <div id="confirmStep" class="hidden">
+            <div class="eyebrow">Final confirmation</div>
+            <h1>Permanently delete account?</h1>
+            <p class="intro">This removes your My Conquests account and the associated data and files handled by the service. This action cannot be undone.</p>
+            <div class="step">
+              <button class="action danger" id="deleteAccount" type="button">Permanently delete my account</button>
+              <div class="message" id="deleteMessage" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <div id="successStep" class="hidden success">
+            <div class="success-mark">✓</div>
+            <h1>Account deleted</h1>
+            <p class="intro">Your deletion request has been completed. You can now close this page.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell footer-inner">
+        <div>© <span id="year"></span> My Conquests</div>
+        <div class="footer-links"><a href="/">Home</a><a href="mailto:support@myconquests.com">Support</a></div>
+      </div>
+    </footer>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+    const SUPABASE_URL = 'https://grqwekxcgnshbtxvyejp.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_DP1eVKv1vCgi-JKbDGmE5A_vHfV6rlc';
+    const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+      auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const requestStep = document.getElementById('requestStep');
+    const verifyStep = document.getElementById('verifyStep');
+    const confirmStep = document.getElementById('confirmStep');
+    const successStep = document.getElementById('successStep');
+    const emailInput = document.getElementById('email');
+    const otpInput = document.getElementById('otp');
+    const sendCodeButton = document.getElementById('sendCode');
+    const verifyCodeButton = document.getElementById('verifyCode');
+    const resendCodeButton = document.getElementById('resendCode');
+    const deleteButton = document.getElementById('deleteAccount');
+    const requestMessage = document.getElementById('requestMessage');
+    const verifyMessage = document.getElementById('verifyMessage');
+    const deleteMessage = document.getElementById('deleteMessage');
+    const verifyIntro = document.getElementById('verifyIntro');
+
+    let email = '';
+    let resendAvailableAt = 0;
+
+    function validEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    }
+
+    function setBusy(button, busy, busyLabel, idleLabel) {
+      button.disabled = busy;
+      button.textContent = busy ? busyLabel : idleLabel;
+    }
+
+    function setMessage(element, value, isError = false) {
+      element.textContent = value;
+      element.classList.toggle('error', isError);
+    }
+
+    function maskEmail(value) {
+      const [name, domain] = value.split('@');
+      if (!name || !domain) return value;
+      const visible = name.length <= 2 ? name.slice(0, 1) : name.slice(0, 2);
+      return `${visible}${'•'.repeat(Math.max(3, Math.min(7, name.length - visible.length)))}@${domain}`;
+    }
+
+    async function sendCode() {
+      const nextEmail = emailInput.value.trim().toLowerCase();
+      if (!validEmail(nextEmail)) {
+        setMessage(requestMessage, 'Please enter a valid email address.', true);
+        return;
+      }
+
+      email = nextEmail;
+      setMessage(requestMessage, '');
+      setBusy(sendCodeButton, true, 'Sending…', 'Send verification code');
+
+      try {
+        await supabase.auth.signOut().catch(() => {});
+        const { error } = await supabase.auth.signInWithOtp({
+          email,
+          options: { shouldCreateUser: false }
+        });
+
+        if (error) throw error;
+
+        requestStep.classList.add('hidden');
+        verifyStep.classList.remove('hidden');
+        verifyIntro.textContent = `Enter the 6-digit verification code sent to ${maskEmail(email)}.`;
+        otpInput.focus();
+        resendAvailableAt = Date.now() + 60000;
+        updateResendState();
+      } catch (_) {
+        setMessage(requestMessage, 'We couldn’t send a verification code. Please try again shortly.', true);
+      } finally {
+        setBusy(sendCodeButton, false, 'Sending…', 'Send verification code');
+      }
+    }
+
+    async function verifyCode() {
+      const token = otpInput.value.replace(/\D/g, '').slice(0, 6);
+      otpInput.value = token;
+      if (token.length !== 6) {
+        setMessage(verifyMessage, 'Enter the 6-digit code from your email.', true);
+        return;
+      }
+
+      setMessage(verifyMessage, '');
+      setBusy(verifyCodeButton, true, 'Verifying…', 'Verify code');
+
+      try {
+        const { data, error } = await supabase.auth.verifyOtp({ email, token, type: 'email' });
+        if (error || !data.session) throw error || new Error('No session returned');
+
+        verifyStep.classList.add('hidden');
+        confirmStep.classList.remove('hidden');
+      } catch (_) {
+        setMessage(verifyMessage, 'That code is invalid or has expired. Please try again.', true);
+      } finally {
+        setBusy(verifyCodeButton, false, 'Verifying…', 'Verify code');
+      }
+    }
+
+    async function resendCode() {
+      if (Date.now() < resendAvailableAt) return;
+      setMessage(verifyMessage, '');
+      setBusy(resendCodeButton, true, 'Sending…', 'Send a new code');
+      try {
+        const { error } = await supabase.auth.signInWithOtp({ email, options: { shouldCreateUser: false } });
+        if (error) throw error;
+        resendAvailableAt = Date.now() + 60000;
+        setMessage(verifyMessage, 'A new verification code has been sent.');
+        updateResendState();
+      } catch (_) {
+        setMessage(verifyMessage, 'We couldn’t send another code yet. Please try again shortly.', true);
+      } finally {
+        if (Date.now() >= resendAvailableAt) setBusy(resendCodeButton, false, 'Sending…', 'Send a new code');
+      }
+    }
+
+    function updateResendState() {
+      const remaining = Math.max(0, Math.ceil((resendAvailableAt - Date.now()) / 1000));
+      if (remaining > 0) {
+        resendCodeButton.disabled = true;
+        resendCodeButton.textContent = `Send a new code (${remaining}s)`;
+        setTimeout(updateResendState, 1000);
+      } else {
+        resendCodeButton.disabled = false;
+        resendCodeButton.textContent = 'Send a new code';
+      }
+    }
+
+    async function deleteAccount() {
+      setMessage(deleteMessage, '');
+      setBusy(deleteButton, true, 'Deleting…', 'Permanently delete my account');
+
+      try {
+        const { data: sessionData } = await supabase.auth.getSession();
+        if (!sessionData.session) throw new Error('Verification session expired');
+
+        const { error } = await supabase.functions.invoke('delete-account', { body: {} });
+        if (error) throw error;
+
+        await supabase.auth.signOut().catch(() => {});
+        confirmStep.classList.add('hidden');
+        successStep.classList.remove('hidden');
+      } catch (_) {
+        setMessage(deleteMessage, 'We couldn’t delete the account. Your account has not been removed. Please try again or contact support.', true);
+        setBusy(deleteButton, false, 'Deleting…', 'Permanently delete my account');
+      }
+    }
+
+    otpInput.addEventListener('input', () => {
+      otpInput.value = otpInput.value.replace(/\D/g, '').slice(0, 6);
+    });
+    emailInput.addEventListener('keydown', event => { if (event.key === 'Enter') sendCode(); });
+    otpInput.addEventListener('keydown', event => { if (event.key === 'Enter') verifyCode(); });
+    sendCodeButton.addEventListener('click', sendCode);
+    verifyCodeButton.addEventListener('click', verifyCode);
+    resendCodeButton.addEventListener('click', resendCode);
+    deleteButton.addEventListener('click', deleteAccount);
+  </script>
+</body>
+</html>
